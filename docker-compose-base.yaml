@@ -1,0 +1,12 @@
+services:
+  catalog-db:
+    image: postgres:16
+    restart: unless-stopped
+    volumes:
+      - catalog-db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=catalog
+volumes:
+  catalog-db-data:

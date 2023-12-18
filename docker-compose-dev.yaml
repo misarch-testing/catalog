@@ -1,0 +1,9 @@
+services:
+  catalog-db:
+    extends:
+      file: docker-compose-base.yaml
+      service: catalog-db
+    ports:
+        - 5432:5432
+volumes:
+  catalog-db-data:
