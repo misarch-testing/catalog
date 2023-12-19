@@ -10,6 +10,12 @@ import org.misarch.catalog.persistance.repository.CategoryRepository
 import org.misarch.catalog.persistance.repository.ProductRepository
 import org.springframework.stereotype.Component
 
+/**
+ * Defines GraphQL queries
+ *
+ * @property productRepository repository for products
+ * @property categoryRepository repository for categories
+ */
 @Component
 class Query(
     private val productRepository: ProductRepository,

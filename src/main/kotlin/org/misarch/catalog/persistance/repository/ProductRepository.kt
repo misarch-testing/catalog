@@ -5,5 +5,8 @@ import org.misarch.catalog.persistance.model.ProductEntity
 import org.springframework.stereotype.Repository
 import java.util.*
 
+/**
+ * Repository for [ProductEntity]s
+ */
 @Repository
 interface ProductRepository : QuerydslR2dbcRepository<ProductEntity, UUID>

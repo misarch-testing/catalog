@@ -6,6 +6,18 @@ import org.springframework.data.relational.core.mapping.Table
 import java.time.OffsetDateTime
 import java.util.*
 
+/**
+ * Entity for product variant versions
+ *
+ * @property name name of the product variant version
+ * @property description description of the product variant version
+ * @property version version of the product variant version
+ * @property retailPrice retail price of the product variant version
+ * @property createdAt creation timestamp of the product variant version
+ * @property canBeReturnedForDays number of days the product variant version can be returned, null if it cannot be returned
+ * @property productVariantId id of the referenced product variant
+ * @property id unique identifier of the product variant version
+ */
 @Table
 class ProductVariantVersionEntity(
     val name: String,
@@ -20,9 +32,17 @@ class ProductVariantVersionEntity(
 ) {
 
     companion object {
+        /**
+         * Querydsl entity
+         */
         val ENTITY = QProductVariantVersionEntity.productVariantVersionEntity!!
     }
 
+    /**
+     * Convert this entity to a GraphQL DTO
+     *
+     * @return GraphQL DTO
+     */
     fun toDTO(): ProductVariantVersion {
         return ProductVariantVersion(
             id = id!!,

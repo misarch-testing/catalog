@@ -5,5 +5,8 @@ import org.misarch.catalog.persistance.model.CategoryEntity
 import org.springframework.stereotype.Repository
 import java.util.*
 
+/**
+ * Repository for [CategoryEntity]s
+ */
 @Repository
 interface CategoryRepository : QuerydslR2dbcRepository<CategoryEntity, UUID>

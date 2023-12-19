@@ -9,6 +9,15 @@ import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Propagation
 import org.springframework.transaction.annotation.Transactional
 
+/**
+ * Defines GraphQL mutations
+ *
+ * @property productService service for products
+ * @property productVariantService service for product variants
+ * @property productVariantVersionService service for product variant versions
+ * @property categoryService service for categories
+ * @property categoryCharacteristicService service for category characteristics
+ */
 @Component
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 class Mutation(

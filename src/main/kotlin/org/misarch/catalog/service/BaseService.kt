@@ -5,5 +5,9 @@ import java.util.*
 
 /**
  * Base service for all services
+ *
+ * @param T entity type
+ * @param R repository type
+ * @property repository the provided repository
  */
 abstract class BaseService<T, R : QuerydslR2dbcRepository<T, UUID>>(protected val repository: R)

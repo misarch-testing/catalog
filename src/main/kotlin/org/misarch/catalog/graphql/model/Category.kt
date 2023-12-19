@@ -14,6 +14,7 @@ import org.misarch.catalog.persistance.repository.ProductRepository
 import org.springframework.beans.factory.annotation.Autowired
 import java.util.*
 
+@GraphQLDescription("A category")
 class Category(
     id: UUID,
     @GraphQLDescription("The name of the category.")

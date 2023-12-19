@@ -2,14 +2,24 @@ package org.misarch.catalog.service
 
 import kotlinx.coroutines.reactor.awaitSingle
 import org.misarch.catalog.graphql.input.CreateProductInput
+import org.misarch.catalog.persistance.model.CategoryEntity
 import org.misarch.catalog.persistance.model.ProductEntity
 import org.misarch.catalog.persistance.model.ProductToCategoryEntity
+import org.misarch.catalog.persistance.model.ProductVariantEntity
 import org.misarch.catalog.persistance.repository.CategoryRepository
 import org.misarch.catalog.persistance.repository.ProductRepository
 import org.misarch.catalog.persistance.repository.ProductToCategoryRepository
 import org.springframework.stereotype.Service
 import java.util.*
 
+/**
+ * Service for [ProductEntity]s
+ *
+ * @param repository the provided repository
+ * @property productVariantService service for [ProductVariantEntity]s
+ * @property productToCategoryRepository repository for [ProductToCategoryEntity]s
+ * @property categoryRepository repository for [CategoryEntity]s
+ */
 @Service
 class ProductService(
     repository: ProductRepository,
@@ -18,6 +28,12 @@ class ProductService(
     private val categoryRepository: CategoryRepository
 ) : BaseService<ProductEntity, ProductRepository>(repository) {
 
+    /**
+     * Creates a product, also creates the default variant (and their versions) and adds the categories
+     *
+     * @param input defines the product (and default variant) to be created
+     * @return the created product
+     */
     suspend fun createProduct(input: CreateProductInput): ProductEntity {
         val product = ProductEntity(
             internalName = input.internalName,
@@ -32,6 +48,12 @@ class ProductService(
         return repository.save(savedProduct).awaitSingle()
     }
 
+    /**
+     * Adds categories to a product
+     *
+     * @param product the product where the categories should be added
+     * @param categoryIds the ids of the categories
+     */
     private suspend fun addCategories(product: ProductEntity, categoryIds: List<UUID>) {
         checkCategoriesExist(categoryIds)
         productToCategoryRepository.saveAll(
@@ -45,6 +67,12 @@ class ProductService(
         ).collectList().awaitSingle()
     }
 
+    /**
+     * Checks if the categories exist
+     *
+     * @param categoryIds the ids of the categories
+     * @throws IllegalArgumentException if a category does not exist
+     */
     private suspend fun checkCategoriesExist(categoryIds: List<UUID>) {
         categoryIds.forEach { categoryId ->
             if (!categoryRepository.existsById(categoryId).awaitSingle()) {

@@ -5,6 +5,14 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
 import java.util.*
 
+/**
+ * Entity for products
+ *
+ * @property internalName internal name of the product
+ * @property isPubliclyVisible whether the product is publicly visible
+ * @property defaultVariantId id of the default variant of the product
+ * @property id unique identifier of the product
+ */
 @Table
 class ProductEntity(
     var internalName: String,
@@ -15,9 +23,17 @@ class ProductEntity(
 ) {
 
     companion object {
+        /**
+         * Querydsl entity
+         */
         val ENTITY = QProductEntity.productEntity!!
     }
 
+    /**
+     * Convert this entity to a GraphQL DTO
+     *
+     * @return GraphQL DTO
+     */
     fun toDTO(): Product {
         return Product(
             id = id!!,
