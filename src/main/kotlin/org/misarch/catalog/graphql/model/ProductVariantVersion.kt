@@ -3,6 +3,10 @@ package org.misarch.catalog.graphql.model
 import com.expediagroup.graphql.generator.annotations.GraphQLDescription
 import com.expediagroup.graphql.generator.annotations.GraphQLIgnore
 import kotlinx.coroutines.reactor.awaitSingle
+import org.misarch.catalog.graphql.model.connection.CategoryCharacteristicValueConnection
+import org.misarch.catalog.graphql.model.connection.CategoryCharacteristicValueOrder
+import org.misarch.catalog.persistance.model.ProductVariantVersionEntity
+import org.misarch.catalog.persistance.repository.CategoryCharacteristicValueRepository
 import org.misarch.catalog.persistance.repository.ProductVariantRepository
 import org.springframework.beans.factory.annotation.Autowired
 import java.time.OffsetDateTime
@@ -33,6 +37,27 @@ class ProductVariantVersion(
         productVariantRepository: ProductVariantRepository
     ): ProductVariant {
         return productVariantRepository.findById(productVariantId).awaitSingle().toDTO()
+    }
+
+    @GraphQLDescription("Get all associated characteristic values")
+    suspend fun characteristicValues(
+        @GraphQLDescription("Number of items to return")
+        first: Int? = null,
+        @GraphQLDescription("Number of items to skip")
+        skip: Int? = null,
+        @GraphQLDescription("Ordering")
+        orderBy: CategoryCharacteristicValueOrder? = null,
+        @GraphQLIgnore
+        @Autowired
+        categoryCharacteristicValueRepository: CategoryCharacteristicValueRepository
+    ): CategoryCharacteristicValueConnection {
+        return CategoryCharacteristicValueConnection(
+            first,
+            skip,
+            ProductVariantVersionEntity.ENTITY.productVariantId.eq(id),
+            orderBy,
+            categoryCharacteristicValueRepository
+        )
     }
 
 }

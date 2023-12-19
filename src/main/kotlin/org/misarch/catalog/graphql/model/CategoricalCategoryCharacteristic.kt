@@ -8,4 +8,5 @@ class CategoricalCategoryCharacteristic(
     id: UUID,
     name: String,
     description: String,
-) : CategoryCharacteristic(id, name, description)
+    categoryId: UUID
+) : CategoryCharacteristic(id, name, description, categoryId)

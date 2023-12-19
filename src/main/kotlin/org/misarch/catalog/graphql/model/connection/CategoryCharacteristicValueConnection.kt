@@ -4,16 +4,16 @@ import com.expediagroup.graphql.generator.annotations.GraphQLDescription
 import com.querydsl.core.types.Predicate
 import com.querydsl.core.types.dsl.ComparableExpression
 import com.querydsl.sql.SQLQuery
-import org.misarch.catalog.graphql.model.CategoryCharacteristic
+import org.misarch.catalog.graphql.model.CategoryCharacteristicValue
 import org.misarch.catalog.graphql.model.connection.base.BaseConnection
 import org.misarch.catalog.graphql.model.connection.base.BaseOrder
 import org.misarch.catalog.graphql.model.connection.base.BaseOrderField
 import org.misarch.catalog.graphql.model.connection.base.OrderDirection
-import org.misarch.catalog.persistance.model.CategoryCharacteristicEntity
-import org.misarch.catalog.persistance.repository.CategoryCharacteristicRepository
+import org.misarch.catalog.persistance.model.CategoryCharacteristicValueEntity
+import org.misarch.catalog.persistance.repository.CategoryCharacteristicValueRepository
 
 /**
- * A GraphQL connection for [CategoryCharacteristic]s.
+ * A GraphQL connection for [CategoryCharacteristicValue]s.
  *
  * @param first The maximum number of items to return
  * @param skip The number of items to skip
@@ -22,42 +22,42 @@ import org.misarch.catalog.persistance.repository.CategoryCharacteristicReposito
  * @param repository The repository to fetch the items from
  * @param applyJoin A function to apply a join to the query
  */
-@GraphQLDescription("A connection to a list of `CategoryCharacteristic` values.")
-class CategoryCharacteristicConnection(
+@GraphQLDescription("A connection to a list of `CategoryCharacteristicValue` values.")
+class CategoryCharacteristicValueConnection(
     first: Int?,
     skip: Int?,
     predicate: Predicate?,
-    order: CategoryCharacteristicOrder?,
-    repository: CategoryCharacteristicRepository,
+    order: CategoryCharacteristicValueOrder?,
+    repository: CategoryCharacteristicValueRepository,
     applyJoin: (query: SQLQuery<*>) -> SQLQuery<*> = { it }
-) : BaseConnection<CategoryCharacteristic, CategoryCharacteristicEntity>(
+) : BaseConnection<CategoryCharacteristicValue, CategoryCharacteristicValueEntity>(
     first,
     skip,
     predicate,
-    (order ?: CategoryCharacteristicOrder.DEFAULT).toOrderSpecifier(),
+    (order ?: CategoryCharacteristicValueOrder.DEFAULT).toOrderSpecifier(),
     repository,
-    CategoryCharacteristicEntity.ENTITY,
+    CategoryCharacteristicValueEntity.ENTITY,
     applyJoin
 ) {
 
-    override val primaryKey: ComparableExpression<*> get() = CategoryCharacteristicEntity.ENTITY.id
+    override val primaryKey: ComparableExpression<*> get() = CategoryCharacteristicValueEntity.ENTITY.id
 
-    override fun toDto(value: CategoryCharacteristicEntity): CategoryCharacteristic {
+    override fun toDto(value: CategoryCharacteristicValueEntity): CategoryCharacteristicValue {
         return value.toDTO()
     }
 }
 
-@GraphQLDescription("CategoryCharacteristic order fields")
-enum class CategoryCharacteristicOrderField(override vararg val expressions: ComparableExpression<*>) : BaseOrderField {
-    @GraphQLDescription("Order categoryCharacteristics by their id")
-    ID(CategoryCharacteristicEntity.ENTITY.id)
+@GraphQLDescription("CategoryCharacteristicValue order fields")
+enum class CategoryCharacteristicValueOrderField(override vararg val expressions: ComparableExpression<*>) : BaseOrderField {
+    @GraphQLDescription("Order categoryCharacteristicValues by their id")
+    ID(CategoryCharacteristicValueEntity.ENTITY.id)
 }
 
-@GraphQLDescription("CategoryCharacteristic order")
-class CategoryCharacteristicOrder(direction: OrderDirection, field: CategoryCharacteristicOrderField) :
-    BaseOrder<CategoryCharacteristicOrderField>(direction, field) {
+@GraphQLDescription("CategoryCharacteristicValue order")
+class CategoryCharacteristicValueOrder(direction: OrderDirection, field: CategoryCharacteristicValueOrderField) :
+    BaseOrder<CategoryCharacteristicValueOrderField>(direction, field) {
 
     companion object {
-        val DEFAULT = CategoryCharacteristicOrder(OrderDirection.ASC, CategoryCharacteristicOrderField.ID)
+        val DEFAULT = CategoryCharacteristicValueOrder(OrderDirection.ASC, CategoryCharacteristicValueOrderField.ID)
     }
 }

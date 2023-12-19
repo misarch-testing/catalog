@@ -33,13 +33,15 @@ class CategoryCharacteristicEntity(
             Discriminator.CATEGORICAL -> CategoricalCategoryCharacteristic(
                 id = id!!,
                 name = name,
-                description = description
+                description = description,
+                categoryId = categoryId
             )
 
             Discriminator.NUMERICAL -> NumericalCategoryCharacteristic(
                 id = id!!,
                 name = name,
                 description = description,
+                categoryId = categoryId,
                 unit = unit!!
             )
         }
