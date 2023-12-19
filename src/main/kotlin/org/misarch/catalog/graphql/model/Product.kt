@@ -3,9 +3,14 @@ package org.misarch.catalog.graphql.model
 import com.expediagroup.graphql.generator.annotations.GraphQLDescription
 import com.expediagroup.graphql.generator.annotations.GraphQLIgnore
 import kotlinx.coroutines.reactor.awaitSingle
+import org.misarch.catalog.graphql.model.connection.CategoryConnection
+import org.misarch.catalog.graphql.model.connection.CategoryOrder
 import org.misarch.catalog.graphql.model.connection.ProductVariantConnection
 import org.misarch.catalog.graphql.model.connection.ProductVariantOrder
+import org.misarch.catalog.persistance.model.CategoryEntity
+import org.misarch.catalog.persistance.model.ProductToCategoryEntity
 import org.misarch.catalog.persistance.model.ProductVariantEntity
+import org.misarch.catalog.persistance.repository.CategoryRepository
 import org.misarch.catalog.persistance.repository.ProductVariantRepository
 import org.springframework.beans.factory.annotation.Autowired
 import java.util.*
@@ -43,6 +48,26 @@ class Product(
         return ProductVariantConnection(
             first, skip, ProductVariantEntity.ENTITY.productId.eq(id), orderBy, productVariantRepository
         )
+    }
+
+    @GraphQLDescription("Get all associated variants")
+    suspend fun categories(
+        @GraphQLDescription("Number of items to return")
+        first: Int? = null,
+        @GraphQLDescription("Number of items to skip")
+        skip: Int? = null,
+        @GraphQLDescription("Ordering")
+        orderBy: CategoryOrder? = null,
+        @GraphQLIgnore
+        @Autowired
+        categoryRepository: CategoryRepository
+    ): CategoryConnection {
+        return CategoryConnection(
+            first, skip, ProductToCategoryEntity.ENTITY.productId.eq(id), orderBy, categoryRepository
+        ) {
+            it.innerJoin(ProductToCategoryEntity.ENTITY)
+                .on(ProductToCategoryEntity.ENTITY.categoryId.eq(CategoryEntity.ENTITY.id))
+        }
     }
 
 }

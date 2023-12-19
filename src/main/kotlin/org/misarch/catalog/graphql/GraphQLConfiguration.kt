@@ -14,7 +14,7 @@ class GraphQLConfiguration {
     @Bean
     fun schemaGeneratorHooks() = object : SchemaGeneratorHooks {
         override fun willGenerateGraphQLType(type: KType): GraphQLType? {
-            return when(type.classifier) {
+            return when (type.classifier) {
                 OffsetDateTime::class -> DateTimeScalar.INSTANCE
                 else -> null
             }

@@ -1,7 +1,7 @@
 package org.misarch.catalog.graphql.input
 
 import com.expediagroup.graphql.generator.annotations.GraphQLDescription
-import kotlin.properties.Delegates
+import com.expediagroup.graphql.generator.scalars.ID
 
 @GraphQLDescription("Input for the createProduct mutation")
 class CreateProductInput(
@@ -10,5 +10,7 @@ class CreateProductInput(
     @GraphQLDescription("If true, the product is visible to customers.")
     val isPubliclyVisible: Boolean,
     @GraphQLDescription("The default variant of the product.")
-    val defaultVariant: ProductVariantInput
+    val defaultVariant: ProductVariantInput,
+    @GraphQLDescription("The categories this product is associated with.")
+    val categories: List<ID>,
 )

@@ -7,5 +7,4 @@ import com.expediagroup.graphql.generator.annotations.GraphQLIgnore
 abstract class CategoryCharacteristicValue<T>(
     @GraphQLDescription("The value of the characteristic.")
     val value: T
-) {
-}
+)

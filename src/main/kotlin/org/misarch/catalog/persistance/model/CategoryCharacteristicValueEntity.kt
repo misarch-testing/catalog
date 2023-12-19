@@ -2,7 +2,7 @@ package org.misarch.catalog.persistance.model
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
-import java.util.UUID
+import java.util.*
 
 @Table
 class CategoryCharacteristicValueEntity(

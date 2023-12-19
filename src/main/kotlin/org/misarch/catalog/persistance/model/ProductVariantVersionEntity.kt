@@ -1,11 +1,10 @@
 package org.misarch.catalog.persistance.model
 
-import com.expediagroup.graphql.generator.scalars.ID
 import org.misarch.catalog.graphql.model.ProductVariantVersion
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
 import java.time.OffsetDateTime
-import java.util.UUID
+import java.util.*
 
 @Table
 class ProductVariantVersionEntity(
@@ -21,7 +20,7 @@ class ProductVariantVersionEntity(
 ) {
 
     companion object {
-        val ENTITY = QProductVariantVersionEntity.productVariantVersionEntity
+        val ENTITY = QProductVariantVersionEntity.productVariantVersionEntity!!
     }
 
     fun toDTO(): ProductVariantVersion {

@@ -1,6 +1,5 @@
 package org.misarch.catalog.persistance.model
 
-import com.expediagroup.graphql.generator.scalars.ID
 import org.misarch.catalog.graphql.model.ProductVariant
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
@@ -16,7 +15,7 @@ class ProductVariantEntity(
 ) {
 
     companion object {
-        val ENTITY = QProductVariantEntity.productVariantEntity
+        val ENTITY = QProductVariantEntity.productVariantEntity!!
     }
 
     fun toDTO(): ProductVariant {

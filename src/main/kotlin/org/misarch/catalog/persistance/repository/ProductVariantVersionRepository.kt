@@ -11,6 +11,9 @@ import java.util.*
 interface ProductVariantVersionRepository : QuerydslR2dbcRepository<ProductVariantVersionEntity, UUID> {
 
     @Query("SELECT MAX(p.version) FROM ProductVariantVersionEntity p WHERE p.productVariantId = :productVariantId")
-    suspend fun findMaxVersionByProductVariantId(@Param("productVariantId") productVariantId: UUID): Int?
+    suspend fun findMaxVersionByProductVariantId(
+        @Param("productVariantId")
+        productVariantId: UUID
+    ): Int?
 
 }

@@ -32,7 +32,10 @@ class ProductVariantService(
             id = null
         )
         val savedProductVariant = repository.save(productVariant).awaitSingle()
-        val initialVersion = productVariantVersionService.createProductVariantVersionInternal(input.initialVersion, savedProductVariant.id!!)
+        val initialVersion = productVariantVersionService.createProductVariantVersionInternal(
+            input.initialVersion,
+            savedProductVariant.id!!
+        )
         savedProductVariant.currentVersion = initialVersion.id!!
         return repository.save(savedProductVariant).awaitSingle()
     }

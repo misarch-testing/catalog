@@ -8,13 +8,13 @@ import org.misarch.catalog.persistance.repository.ProductVariantRepository
 import org.misarch.catalog.persistance.repository.ProductVariantVersionRepository
 import org.springframework.stereotype.Service
 import java.time.OffsetDateTime
-import java.util.UUID
+import java.util.*
 
 @Service
 class ProductVariantVersionService(
     repository: ProductVariantVersionRepository,
     private val productVariantRepository: ProductVariantRepository
-): BaseService<ProductVariantVersionEntity, ProductVariantVersionRepository>(repository) {
+) : BaseService<ProductVariantVersionEntity, ProductVariantVersionRepository>(repository) {
 
     suspend fun createProductVariantVersion(
         input: CreateProductVariantVersionInput
@@ -22,7 +22,8 @@ class ProductVariantVersionService(
         if (!productVariantRepository.existsById(UUID.fromString(input.productVariantId.value)).awaitSingle()) {
             throw IllegalArgumentException("Product variant with id ${input.productVariantId} does not exist.")
         }
-        val productVariantVersion = createProductVariantVersionInternal(input, UUID.fromString(input.productVariantId.value))
+        val productVariantVersion =
+            createProductVariantVersionInternal(input, UUID.fromString(input.productVariantId.value))
         return productVariantVersion
     }
 

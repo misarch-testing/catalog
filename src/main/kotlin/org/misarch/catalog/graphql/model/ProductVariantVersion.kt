@@ -2,12 +2,11 @@ package org.misarch.catalog.graphql.model
 
 import com.expediagroup.graphql.generator.annotations.GraphQLDescription
 import com.expediagroup.graphql.generator.annotations.GraphQLIgnore
-import com.expediagroup.graphql.generator.scalars.ID
 import kotlinx.coroutines.reactor.awaitSingle
 import org.misarch.catalog.persistance.repository.ProductVariantRepository
 import org.springframework.beans.factory.annotation.Autowired
 import java.time.OffsetDateTime
-import java.util.UUID
+import java.util.*
 
 @GraphQLDescription("A version of a product variant.")
 class ProductVariantVersion(
