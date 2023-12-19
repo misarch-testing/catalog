@@ -22,7 +22,7 @@ import java.util.*
  */
 @Table
 class CategoryCharacteristicEntity(
-    val discriminator: Discriminator,
+    val discriminator: CategoryCharacteristicDiscriminator,
     val name: String,
     val description: String,
     val unit: String?,
@@ -30,21 +30,6 @@ class CategoryCharacteristicEntity(
     @Id
     val id: UUID?
 ) {
-
-    /**
-     * Discriminator to distinguish between categorical and numerical characteristics
-     */
-    enum class Discriminator {
-        /**
-         * Categorical characteristic, unit is null
-         */
-        CATEGORICAL,
-
-        /**
-         * Numerical characteristic, unit is not null
-         */
-        NUMERICAL
-    }
 
     companion object {
         /**
@@ -60,14 +45,14 @@ class CategoryCharacteristicEntity(
      */
     fun toDTO(): CategoryCharacteristic {
         return when (discriminator) {
-            Discriminator.CATEGORICAL -> CategoricalCategoryCharacteristic(
+            CategoryCharacteristicDiscriminator.CATEGORICAL -> CategoricalCategoryCharacteristic(
                 id = id!!,
                 name = name,
                 description = description,
                 categoryId = categoryId
             )
 
-            Discriminator.NUMERICAL -> NumericalCategoryCharacteristic(
+            CategoryCharacteristicDiscriminator.NUMERICAL -> NumericalCategoryCharacteristic(
                 id = id!!,
                 name = name,
                 description = description,

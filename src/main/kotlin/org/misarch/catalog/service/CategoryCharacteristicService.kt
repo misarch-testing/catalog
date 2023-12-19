@@ -5,10 +5,12 @@ import org.misarch.catalog.graphql.input.CategoricalCategoryCharacteristicInput
 import org.misarch.catalog.graphql.input.CreateCategoricalCategoryCharacteristicInput
 import org.misarch.catalog.graphql.input.CreateNumericalCategoryCharacteristicInput
 import org.misarch.catalog.graphql.input.NumericalCategoryCharacteristicInput
+import org.misarch.catalog.persistance.model.CategoryCharacteristicDiscriminator
 import org.misarch.catalog.persistance.model.CategoryCharacteristicEntity
 import org.misarch.catalog.persistance.model.CategoryEntity
 import org.misarch.catalog.persistance.repository.CategoryCharacteristicRepository
 import org.misarch.catalog.persistance.repository.CategoryRepository
+import org.misarch.catalog.util.uuid
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -31,7 +33,7 @@ class CategoryCharacteristicService(
      * @return the created characteristic
      */
     suspend fun createCategoricalCategoryCharacteristic(input: CreateCategoricalCategoryCharacteristicInput): CategoryCharacteristicEntity {
-        val categoryId = UUID.fromString(input.categoryId.value)
+        val categoryId = input.categoryId.uuid
         checkCategoryExists(categoryId)
         return createCategoricalCategoryCharacteristicInternal(input, categoryId)
     }
@@ -47,7 +49,7 @@ class CategoryCharacteristicService(
         input: CategoricalCategoryCharacteristicInput, categoryId: UUID
     ): CategoryCharacteristicEntity {
         val categoryCharacteristic = CategoryCharacteristicEntity(
-            discriminator = CategoryCharacteristicEntity.Discriminator.CATEGORICAL,
+            discriminator = CategoryCharacteristicDiscriminator.CATEGORICAL,
             name = input.name,
             description = input.description,
             unit = null,
@@ -65,7 +67,7 @@ class CategoryCharacteristicService(
      * @return the created characteristic
      */
     suspend fun createNumericalCategoryCharacteristic(input: CreateNumericalCategoryCharacteristicInput): CategoryCharacteristicEntity {
-        val categoryId = UUID.fromString(input.categoryId.value)
+        val categoryId = input.categoryId.uuid
         checkCategoryExists(categoryId)
         return createNumericalCategoryCharacteristicInternal(input, categoryId)
     }
@@ -81,7 +83,7 @@ class CategoryCharacteristicService(
         input: NumericalCategoryCharacteristicInput, categoryId: UUID
     ): CategoryCharacteristicEntity {
         val categoryCharacteristic = CategoryCharacteristicEntity(
-            discriminator = CategoryCharacteristicEntity.Discriminator.NUMERICAL,
+            discriminator = CategoryCharacteristicDiscriminator.NUMERICAL,
             name = input.name,
             description = input.description,
             unit = input.unit,

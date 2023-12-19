@@ -18,9 +18,9 @@ import java.util.*
 @GraphQLDescription("A product.")
 class Product(
     id: UUID,
-    @GraphQLDescription("An internal name to identify the product, not visible to customers.")
+    @GraphQLDescription("An internal name to identify the Product, not visible to customers.")
     val internalName: String,
-    @GraphQLDescription("If true, the product is visible to customers.")
+    @GraphQLDescription("If true, the Product is visible to customers.")
     val isPubliclyVisible: Boolean, private val defaultVariantId: UUID
 ) : Node(id) {
 
@@ -33,7 +33,7 @@ class Product(
         return productVariantRepository.findById(defaultVariantId).awaitSingle().toDTO()
     }
 
-    @GraphQLDescription("Get all associated variants")
+    @GraphQLDescription("Get all associated ProductVariants")
     suspend fun variants(
         @GraphQLDescription("Number of items to return")
         first: Int? = null,
@@ -50,7 +50,7 @@ class Product(
         )
     }
 
-    @GraphQLDescription("Get all associated variants")
+    @GraphQLDescription("Get all associated Categories")
     suspend fun categories(
         @GraphQLDescription("Number of items to return")
         first: Int? = null,

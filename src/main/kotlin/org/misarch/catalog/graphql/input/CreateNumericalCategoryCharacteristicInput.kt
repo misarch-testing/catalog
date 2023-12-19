@@ -8,6 +8,6 @@ class CreateNumericalCategoryCharacteristicInput(
     name: String,
     description: String,
     unit: String,
-    @GraphQLDescription("The category that the characteristic belongs to")
+    @GraphQLDescription("The Category that the NumericalCategoryCharacteristic belongs to")
     val categoryId: ID
 ) : NumericalCategoryCharacteristicInput(name, description, unit)

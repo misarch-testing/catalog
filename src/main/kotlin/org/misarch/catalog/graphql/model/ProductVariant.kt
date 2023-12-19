@@ -11,14 +11,14 @@ import org.misarch.catalog.persistance.repository.ProductVariantVersionRepositor
 import org.springframework.beans.factory.annotation.Autowired
 import java.util.*
 
-@GraphQLDescription("A variant of a product.")
+@GraphQLDescription("A variant of a Product.")
 class ProductVariant(
     id: UUID,
-    @GraphQLDescription("If true, the variant is visible to customers.")
+    @GraphQLDescription("If true, the ProductVariant is visible to customers.")
     val isPubliclyVisible: Boolean, private val productId: UUID, private val currentVersion: UUID
 ) : Node(id) {
 
-    @GraphQLDescription("The product this is a variant of.")
+    @GraphQLDescription("The Product this is a ProductVariant of.")
     suspend fun product(
         @Autowired
         @GraphQLIgnore
@@ -27,7 +27,7 @@ class ProductVariant(
         return productRepository.findById(productId).awaitSingle().toDTO()
     }
 
-    @GraphQLDescription("The current version of the product variant.")
+    @GraphQLDescription("The current version of the ProductVariant.")
     suspend fun currentVersion(
         @Autowired
         @GraphQLIgnore

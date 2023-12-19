@@ -48,7 +48,9 @@ class CategoryCharacteristicValueConnection(
 }
 
 @GraphQLDescription("CategoryCharacteristicValue order fields")
-enum class CategoryCharacteristicValueOrderField(override vararg val expressions: ComparableExpression<*>) : BaseOrderField {
+enum class CategoryCharacteristicValueOrderField(
+    override vararg val expressions: ComparableExpression<*>
+) : BaseOrderField {
     @GraphQLDescription("Order categoryCharacteristicValues by their id")
     ID(CategoryCharacteristicValueEntity.ENTITY.id)
 }

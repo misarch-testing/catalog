@@ -7,16 +7,16 @@ import org.misarch.catalog.persistance.repository.CategoryRepository
 import org.springframework.beans.factory.annotation.Autowired
 import java.util.*
 
-@GraphQLDescription("A characteristic of a category.")
+@GraphQLDescription("A characteristic of a Category.")
 abstract class CategoryCharacteristic(
     id: UUID,
-    @GraphQLDescription("The name of the characteristic.")
+    @GraphQLDescription("The name of the CategoryCharacteristic.")
     val name: String,
-    @GraphQLDescription("The description of the characteristic.")
+    @GraphQLDescription("The description of the CategoryCharacteristic.")
     val description: String, private val categoryId: UUID
 ) : Node(id) {
 
-    @GraphQLDescription("The category this item belongs to.")
+    @GraphQLDescription("The Category this item belongs to.")
     suspend fun category(
         @Autowired
         @GraphQLIgnore

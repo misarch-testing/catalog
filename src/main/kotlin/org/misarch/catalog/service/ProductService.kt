@@ -9,6 +9,7 @@ import org.misarch.catalog.persistance.model.ProductVariantEntity
 import org.misarch.catalog.persistance.repository.CategoryRepository
 import org.misarch.catalog.persistance.repository.ProductRepository
 import org.misarch.catalog.persistance.repository.ProductToCategoryRepository
+import org.misarch.catalog.util.uuid
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -42,9 +43,9 @@ class ProductService(
             id = null
         )
         val savedProduct = repository.save(product).awaitSingle()
+        addCategories(savedProduct, input.categoryIds.map { it.uuid })
         val productVariant = productVariantService.createProductVariantInternal(input.defaultVariant, savedProduct.id!!)
         savedProduct.defaultVariantId = productVariant.id
-        addCategories(savedProduct, input.categories.map { UUID.fromString(it.value) })
         return repository.save(savedProduct).awaitSingle()
     }
 

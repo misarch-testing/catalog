@@ -64,7 +64,7 @@ class Mutation(
         return category.toDTO()
     }
 
-    @GraphQLDescription("Create a new categorical category characteristic")
+    @GraphQLDescription("Create a new CategoricalCategoryCharacteristic")
     suspend fun createCategoricalCategoryCharacteristic(
         @GraphQLDescription("Input for the createCategoricalCategoryCharacteristic mutation")
         input: CreateCategoricalCategoryCharacteristicInput

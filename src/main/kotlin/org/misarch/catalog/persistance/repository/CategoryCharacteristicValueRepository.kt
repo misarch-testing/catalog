@@ -1,6 +1,8 @@
 package org.misarch.catalog.persistance.repository
 
 import com.infobip.spring.data.r2dbc.QuerydslR2dbcRepository
+import org.misarch.catalog.persistance.model.CategoryCharacteristicDiscriminator
+import org.misarch.catalog.persistance.model.CategoryCharacteristicEntity
 import org.misarch.catalog.persistance.model.CategoryCharacteristicValueEntity
 import org.springframework.data.r2dbc.repository.Modifying
 import org.springframework.data.r2dbc.repository.Query
@@ -27,13 +29,13 @@ interface CategoryCharacteristicValueRepository : QuerydslR2dbcRepository<Catego
     @Modifying
     @Query(
         """
-            INSERT INTO CategoryCharacteristicValueEntity (categoryCharacteristicId, productVariantVersionId, stringValue, doubleValue)
-            VALUES (:categoryCharacteristicId, :productVariantVersionId, :stringValue, :doubleValue)
+            INSERT INTO CategoryCharacteristicValueEntity (categoryCharacteristicId, productVariantVersionId, stringValue, doubleValue, discriminator)
+            VALUES (:categoryCharacteristicId, :productVariantVersionId, :stringValue, :doubleValue, :discriminator)
             ON CONFLICT (categoryCharacteristicId, productVariantVersionId)
             DO UPDATE SET stringValue = :stringValue, doubleValue = :doubleValue
         """
     )
-    fun upsert(
+    suspend fun upsert(
         @Param("categoryCharacteristicId")
         categoryCharacteristicId: UUID,
         @Param("productVariantVersionId")
@@ -41,7 +43,38 @@ interface CategoryCharacteristicValueRepository : QuerydslR2dbcRepository<Catego
         @Param("stringValue")
         stringValue: String?,
         @Param("doubleValue")
-        doubleValue: Double?
+        doubleValue: Double?,
+        @Param("discriminator")
+        discriminator: CategoryCharacteristicDiscriminator
     )
+
+    /**
+     * Takes a list of category characteristic ids and a product variant version id
+     * and returns only the [CategoryCharacteristicEntity]s which are compatible with the product variant version,
+     * meaning that the associated product has the associated characteristic
+     *
+     * @param productVariantVersionId the id of the product variant
+     * @param categoryCharacteristicIds the ids of the category characteristics
+     * @return the valid [CategoryCharacteristicEntity]s
+     */
+    @Query(
+        """
+            SELECT DISTINCT cc.*
+            FROM ProductVariantVersionEntity pvve
+            JOIN ProductVariantEntity pve ON pvve.productVariantId = pve.id
+            JOIN ProductEntity pe ON pve.productId = pe.id
+            JOIN ProductToCategoryEntity pce ON pe.id = pce.productId
+            JOIN CategoryEntity ce ON pce.categoryId = ce.id
+            JOIN CategoryCharacteristicEntity cc ON ce.id = cc.categoryId
+            WHERE pvve.id = :productVariantVersionId
+              AND cc.id IN (:categoryCharacteristicIds);
+        """
+    )
+    suspend fun findValidCategoryCharacteristics(
+        @Param("productVariantVersionId")
+        productVariantVersionId: UUID,
+        @Param("categoryCharacteristicIds")
+        categoryCharacteristicIds: List<UUID>
+    ): List<CategoryCharacteristicEntity>
 
 }

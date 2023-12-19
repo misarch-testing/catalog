@@ -79,7 +79,8 @@ BEGIN
         SELECT 1
         FROM ProductVariantVersionEntity pvve
         JOIN ProductVariantEntity pve ON pvve.productVariantId = pve.id
-        JOIN ProductToCategoryEntity pce ON pve.productId = pce.productId AND pce.categoryId = NEW.categoryId
+        JOIN ProductToCategoryEntity pce ON pve.productId = pce.productId
+        JOIN CategoryCharacteristicEntity cce ON cce.categoryId = pce.categoryId AND cce.id = NEW.categoryCharacteristicId
         WHERE pvve.id = NEW.productVariantVersionId
     ) THEN
         RAISE EXCEPTION 'Invalid association between productVariantVersionId and categoryId';

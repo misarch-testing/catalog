@@ -9,10 +9,14 @@ class CreateProductVariantVersionInput(
     name: String,
     description: String,
     retailPrice: Int,
-    canBeReturnedForDays: Double? = null
+    canBeReturnedForDays: Double? = null,
+    categoricalCharacteristicValues: List<CategoricalCategoryCharacteristicValueInput>,
+    numericalCharacteristicValues: List<NumericalCategoryCharacteristicValueInput>
 ) : ProductVariantVersionInput(
     name,
     description,
     retailPrice,
-    canBeReturnedForDays
+    canBeReturnedForDays,
+    categoricalCharacteristicValues,
+    numericalCharacteristicValues
 )
