@@ -1,13 +1,18 @@
 package org.misarch.catalog.graphql
 
 import com.expediagroup.graphql.generator.annotations.GraphQLDescription
+import com.expediagroup.graphql.generator.scalars.ID
 import com.expediagroup.graphql.server.operations.Query
+import kotlinx.coroutines.reactor.awaitSingle
+import org.misarch.catalog.graphql.model.Category
+import org.misarch.catalog.graphql.model.Product
 import org.misarch.catalog.graphql.model.connection.CategoryConnection
 import org.misarch.catalog.graphql.model.connection.CategoryOrder
 import org.misarch.catalog.graphql.model.connection.ProductConnection
 import org.misarch.catalog.graphql.model.connection.ProductOrder
 import org.misarch.catalog.persistance.repository.CategoryRepository
 import org.misarch.catalog.persistance.repository.ProductRepository
+import org.misarch.catalog.util.uuid
 import org.springframework.stereotype.Component
 
 /**
@@ -44,6 +49,22 @@ class Query(
         orderBy: CategoryOrder? = null
     ): CategoryConnection {
         return CategoryConnection(first, skip, null, orderBy, categoryRepository)
+    }
+
+    @GraphQLDescription("Get a product by id")
+    suspend fun product(
+        @GraphQLDescription("The id of the product")
+        id: ID
+    ): Product {
+        return productRepository.findById(id.uuid).awaitSingle().toDTO()
+    }
+
+    @GraphQLDescription("Get a category by id")
+    suspend fun category(
+        @GraphQLDescription("The id of the category")
+        id: ID
+    ): Category {
+        return categoryRepository.findById(id.uuid).awaitSingle().toDTO()
     }
 
 }
