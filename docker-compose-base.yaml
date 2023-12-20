@@ -6,7 +6,27 @@ services:
       - catalog-db-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=catalog
+    healthcheck:
+      test: pg_isready -U postgres -d catalog -h localhost -p 5432
+      interval: 10s
+      timeout: 5s
+      retries: 3
+  catalog:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_R2DBC_URL=r2dbc:postgresql://catalog-db:5432/catalog
+      - SPRING_FLYWAY_URL=jdbc:postgresql://catalog-db:5432/catalog
+    healthcheck:
+      test: wget http://localhost:8080/graphiql || exit 1
+      interval: 1s
+      timeout: 10s
+      retries: 20
+      start_period: 3s
+    depends_on:
+      catalog-db:
+        condition: service_healthy
 volumes:
   catalog-db-data:

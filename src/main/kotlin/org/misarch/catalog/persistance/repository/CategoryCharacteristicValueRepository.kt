@@ -51,7 +51,8 @@ interface CategoryCharacteristicValueRepository : QuerydslR2dbcRepository<Catego
     /**
      * Takes a list of category characteristic ids and a product variant version id
      * and returns only the [CategoryCharacteristicEntity]s which are compatible with the product variant version,
-     * meaning that the associated product has the associated characteristic
+     * meaning that the associated product has the associated characteristic.
+     * MUST NOT USE AN EMPTY LIST FOR [categoryCharacteristicIds]!
      *
      * @param productVariantVersionId the id of the product variant
      * @param categoryCharacteristicIds the ids of the category characteristics

@@ -72,6 +72,9 @@ class CategoryCharacteristicValueService(
         productVariantVersionId: UUID, categoricalUUIDs: List<UUID>, numericalUUIDs: List<UUID>
     ) {
         val allValueUUIDs = categoricalUUIDs + numericalUUIDs
+        if (allValueUUIDs.isEmpty()) {
+            return
+        }
         val duplicates = allValueUUIDs.duplicates()
         if (duplicates.isNotEmpty()) {
             throw IllegalArgumentException("Duplicate characteristic ids: $duplicates")
