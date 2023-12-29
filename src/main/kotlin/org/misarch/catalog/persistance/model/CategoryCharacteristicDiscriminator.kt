@@ -5,12 +5,12 @@ package org.misarch.catalog.persistance.model
  */
 enum class CategoryCharacteristicDiscriminator {
     /**
-     * Categorical characteristic
+     * Values have no deeper meaning, i.e. {@code black}
      */
     CATEGORICAL,
 
     /**
-     * Numerical characteristic
+     * Values have an algebraic meaning, i.e. {@code 8GB}
      */
     NUMERICAL
 }

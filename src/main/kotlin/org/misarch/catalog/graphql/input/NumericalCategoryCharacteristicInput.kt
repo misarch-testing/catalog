@@ -2,7 +2,7 @@ package org.misarch.catalog.graphql.input
 
 import com.expediagroup.graphql.generator.annotations.GraphQLDescription
 
-@GraphQLDescription("Input to create a NumericalCategoryCharacteristic for a Category")
+@GraphQLDescription("Input to create a characteristic whose values have arithmetic meaning, i.e. '8GB'")
 open class NumericalCategoryCharacteristicInput(
     @GraphQLDescription("The name of the NumericalCategoryCharacteristic")
     val name: String,

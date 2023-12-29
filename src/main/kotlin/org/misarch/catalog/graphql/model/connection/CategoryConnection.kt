@@ -49,7 +49,7 @@ class CategoryConnection(
 
 @GraphQLDescription("Category order fields")
 enum class CategoryOrderField(override vararg val expressions: ComparableExpression<*>) : BaseOrderField {
-    @GraphQLDescription("Order categorys by their id")
+    @GraphQLDescription("Order categories by their id")
     ID(CategoryEntity.ENTITY.id)
 }
 

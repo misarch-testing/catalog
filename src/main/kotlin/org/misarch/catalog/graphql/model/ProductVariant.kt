@@ -18,7 +18,7 @@ class ProductVariant(
     val isPubliclyVisible: Boolean, private val productId: UUID, private val currentVersion: UUID
 ) : Node(id) {
 
-    @GraphQLDescription("The Product this is a ProductVariant of.")
+    @GraphQLDescription("The Product belonging to this variant.")
     suspend fun product(
         @Autowired
         @GraphQLIgnore
