@@ -60,15 +60,15 @@ interface CategoryCharacteristicValueRepository : QuerydslR2dbcRepository<Catego
      */
     @Query(
         """
-            SELECT DISTINCT cc.*
-            FROM ProductVariantVersionEntity pvve
-            JOIN ProductVariantEntity pve ON pvve.productVariantId = pve.id
-            JOIN ProductEntity pe ON pve.productId = pe.id
-            JOIN ProductToCategoryEntity pce ON pe.id = pce.productId
-            JOIN CategoryEntity ce ON pce.categoryId = ce.id
-            JOIN CategoryCharacteristicEntity cc ON ce.id = cc.categoryId
-            WHERE pvve.id = :productVariantVersionId
-              AND cc.id IN (:categoryCharacteristicIds);
+            SELECT DISTINCT categoryCharacteristic.*
+            FROM ProductVariantVersionEntity productVariantVersion
+            JOIN ProductVariantEntity productVariant ON productVariantVersion.productVariantId = productVariant.id
+            JOIN ProductEntity product ON productVariant.productId = product.id
+            JOIN ProductToCategoryEntity productToCategory ON product.id = productToCategory.productId
+            JOIN CategoryEntity category ON productToCategory.categoryId = category.id
+            JOIN CategoryCharacteristicEntity categoryCharacteristic ON category.id = categoryCharacteristic.categoryId
+            WHERE productVariantVersion.id = :productVariantVersionId
+              AND categoryCharacteristic.id IN (:categoryCharacteristicIds);
         """
     )
     suspend fun findValidCategoryCharacteristics(
