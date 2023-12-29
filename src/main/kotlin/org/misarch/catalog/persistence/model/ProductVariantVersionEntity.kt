@@ -1,4 +1,4 @@
-package org.misarch.catalog.persistance.model
+package org.misarch.catalog.persistence.model
 
 import org.misarch.catalog.graphql.model.ProductVariantVersion
 import org.springframework.data.annotation.Id

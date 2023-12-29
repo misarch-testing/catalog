@@ -1,4 +1,4 @@
-package org.misarch.catalog.persistance
+package org.misarch.catalog.persistence
 
 import io.r2dbc.spi.ConnectionFactory
 import org.flywaydb.core.Flyway

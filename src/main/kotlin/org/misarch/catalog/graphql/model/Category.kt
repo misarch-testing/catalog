@@ -6,11 +6,11 @@ import org.misarch.catalog.graphql.model.connection.CategoryCharacteristicConnec
 import org.misarch.catalog.graphql.model.connection.CategoryCharacteristicOrder
 import org.misarch.catalog.graphql.model.connection.ProductConnection
 import org.misarch.catalog.graphql.model.connection.ProductOrder
-import org.misarch.catalog.persistance.model.CategoryCharacteristicEntity
-import org.misarch.catalog.persistance.model.ProductEntity
-import org.misarch.catalog.persistance.model.ProductToCategoryEntity
-import org.misarch.catalog.persistance.repository.CategoryCharacteristicRepository
-import org.misarch.catalog.persistance.repository.ProductRepository
+import org.misarch.catalog.persistence.model.CategoryCharacteristicEntity
+import org.misarch.catalog.persistence.model.ProductEntity
+import org.misarch.catalog.persistence.model.ProductToCategoryEntity
+import org.misarch.catalog.persistence.repository.CategoryCharacteristicRepository
+import org.misarch.catalog.persistence.repository.ProductRepository
 import org.springframework.beans.factory.annotation.Autowired
 import java.util.*
 

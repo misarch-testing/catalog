@@ -1,4 +1,4 @@
-package org.misarch.catalog.persistance.model
+package org.misarch.catalog.persistence.model
 
 /**
  * Discriminator to distinguish between categorical and numerical characteristics

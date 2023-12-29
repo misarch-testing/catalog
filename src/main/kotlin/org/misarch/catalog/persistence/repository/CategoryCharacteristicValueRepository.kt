@@ -1,9 +1,9 @@
-package org.misarch.catalog.persistance.repository
+package org.misarch.catalog.persistence.repository
 
 import com.infobip.spring.data.r2dbc.QuerydslR2dbcRepository
-import org.misarch.catalog.persistance.model.CategoryCharacteristicDiscriminator
-import org.misarch.catalog.persistance.model.CategoryCharacteristicEntity
-import org.misarch.catalog.persistance.model.CategoryCharacteristicValueEntity
+import org.misarch.catalog.persistence.model.CategoryCharacteristicDiscriminator
+import org.misarch.catalog.persistence.model.CategoryCharacteristicEntity
+import org.misarch.catalog.persistence.model.CategoryCharacteristicValueEntity
 import org.springframework.data.r2dbc.repository.Modifying
 import org.springframework.data.r2dbc.repository.Query
 import org.springframework.data.repository.query.Param

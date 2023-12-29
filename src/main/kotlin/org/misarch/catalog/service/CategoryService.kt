@@ -2,9 +2,9 @@ package org.misarch.catalog.service
 
 import kotlinx.coroutines.reactor.awaitSingle
 import org.misarch.catalog.graphql.input.CreateCategoryInput
-import org.misarch.catalog.persistance.model.CategoryCharacteristicEntity
-import org.misarch.catalog.persistance.model.CategoryEntity
-import org.misarch.catalog.persistance.repository.CategoryRepository
+import org.misarch.catalog.persistence.model.CategoryCharacteristicEntity
+import org.misarch.catalog.persistence.model.CategoryEntity
+import org.misarch.catalog.persistence.repository.CategoryRepository
 import org.misarch.catalog.util.duplicates
 import org.springframework.stereotype.Service
 

@@ -5,9 +5,9 @@ import com.expediagroup.graphql.generator.annotations.GraphQLIgnore
 import kotlinx.coroutines.reactor.awaitSingle
 import org.misarch.catalog.graphql.model.connection.ProductVariantVersionConnection
 import org.misarch.catalog.graphql.model.connection.ProductVariantVersionOrder
-import org.misarch.catalog.persistance.model.ProductVariantVersionEntity
-import org.misarch.catalog.persistance.repository.ProductRepository
-import org.misarch.catalog.persistance.repository.ProductVariantVersionRepository
+import org.misarch.catalog.persistence.model.ProductVariantVersionEntity
+import org.misarch.catalog.persistence.repository.ProductRepository
+import org.misarch.catalog.persistence.repository.ProductVariantVersionRepository
 import org.springframework.beans.factory.annotation.Autowired
 import java.util.*
 

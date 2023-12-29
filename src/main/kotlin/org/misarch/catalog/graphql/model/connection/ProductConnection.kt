@@ -9,8 +9,8 @@ import org.misarch.catalog.graphql.model.connection.base.BaseConnection
 import org.misarch.catalog.graphql.model.connection.base.BaseOrder
 import org.misarch.catalog.graphql.model.connection.base.BaseOrderField
 import org.misarch.catalog.graphql.model.connection.base.OrderDirection
-import org.misarch.catalog.persistance.model.ProductEntity
-import org.misarch.catalog.persistance.repository.ProductRepository
+import org.misarch.catalog.persistence.model.ProductEntity
+import org.misarch.catalog.persistence.repository.ProductRepository
 
 /**
  * A GraphQL connection for [Product]s.

@@ -2,13 +2,13 @@ package org.misarch.catalog.service
 
 import kotlinx.coroutines.reactor.awaitSingle
 import org.misarch.catalog.graphql.input.CreateProductInput
-import org.misarch.catalog.persistance.model.CategoryEntity
-import org.misarch.catalog.persistance.model.ProductEntity
-import org.misarch.catalog.persistance.model.ProductToCategoryEntity
-import org.misarch.catalog.persistance.model.ProductVariantEntity
-import org.misarch.catalog.persistance.repository.CategoryRepository
-import org.misarch.catalog.persistance.repository.ProductRepository
-import org.misarch.catalog.persistance.repository.ProductToCategoryRepository
+import org.misarch.catalog.persistence.model.CategoryEntity
+import org.misarch.catalog.persistence.model.ProductEntity
+import org.misarch.catalog.persistence.model.ProductToCategoryEntity
+import org.misarch.catalog.persistence.model.ProductVariantEntity
+import org.misarch.catalog.persistence.repository.CategoryRepository
+import org.misarch.catalog.persistence.repository.ProductRepository
+import org.misarch.catalog.persistence.repository.ProductToCategoryRepository
 import org.misarch.catalog.util.uuid
 import org.springframework.stereotype.Service
 import java.util.*

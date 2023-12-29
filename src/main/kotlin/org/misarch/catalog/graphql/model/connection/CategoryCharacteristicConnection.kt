@@ -9,8 +9,8 @@ import org.misarch.catalog.graphql.model.connection.base.BaseConnection
 import org.misarch.catalog.graphql.model.connection.base.BaseOrder
 import org.misarch.catalog.graphql.model.connection.base.BaseOrderField
 import org.misarch.catalog.graphql.model.connection.base.OrderDirection
-import org.misarch.catalog.persistance.model.CategoryCharacteristicEntity
-import org.misarch.catalog.persistance.repository.CategoryCharacteristicRepository
+import org.misarch.catalog.persistence.model.CategoryCharacteristicEntity
+import org.misarch.catalog.persistence.repository.CategoryCharacteristicRepository
 
 /**
  * A GraphQL connection for [CategoryCharacteristic]s.

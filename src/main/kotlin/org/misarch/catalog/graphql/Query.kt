@@ -10,8 +10,8 @@ import org.misarch.catalog.graphql.model.connection.CategoryConnection
 import org.misarch.catalog.graphql.model.connection.CategoryOrder
 import org.misarch.catalog.graphql.model.connection.ProductConnection
 import org.misarch.catalog.graphql.model.connection.ProductOrder
-import org.misarch.catalog.persistance.repository.CategoryRepository
-import org.misarch.catalog.persistance.repository.ProductRepository
+import org.misarch.catalog.persistence.repository.CategoryRepository
+import org.misarch.catalog.persistence.repository.ProductRepository
 import org.misarch.catalog.util.uuid
 import org.springframework.stereotype.Component
 

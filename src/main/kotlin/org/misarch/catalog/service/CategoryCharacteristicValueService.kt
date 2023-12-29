@@ -2,9 +2,9 @@ package org.misarch.catalog.service
 
 import org.misarch.catalog.graphql.input.CategoricalCategoryCharacteristicValueInput
 import org.misarch.catalog.graphql.input.NumericalCategoryCharacteristicValueInput
-import org.misarch.catalog.persistance.model.CategoryCharacteristicDiscriminator
-import org.misarch.catalog.persistance.model.CategoryCharacteristicValueEntity
-import org.misarch.catalog.persistance.repository.CategoryCharacteristicValueRepository
+import org.misarch.catalog.persistence.model.CategoryCharacteristicDiscriminator
+import org.misarch.catalog.persistence.model.CategoryCharacteristicValueEntity
+import org.misarch.catalog.persistence.repository.CategoryCharacteristicValueRepository
 import org.misarch.catalog.util.duplicates
 import org.misarch.catalog.util.uuid
 import org.springframework.stereotype.Service

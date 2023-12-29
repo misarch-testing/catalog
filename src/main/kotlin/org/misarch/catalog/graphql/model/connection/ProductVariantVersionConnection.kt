@@ -9,8 +9,8 @@ import org.misarch.catalog.graphql.model.connection.base.BaseConnection
 import org.misarch.catalog.graphql.model.connection.base.BaseOrder
 import org.misarch.catalog.graphql.model.connection.base.BaseOrderField
 import org.misarch.catalog.graphql.model.connection.base.OrderDirection
-import org.misarch.catalog.persistance.model.ProductVariantVersionEntity
-import org.misarch.catalog.persistance.repository.ProductVariantVersionRepository
+import org.misarch.catalog.persistence.model.ProductVariantVersionEntity
+import org.misarch.catalog.persistence.repository.ProductVariantVersionRepository
 
 /**
  * A GraphQL connection for [ProductVariantVersion]s.

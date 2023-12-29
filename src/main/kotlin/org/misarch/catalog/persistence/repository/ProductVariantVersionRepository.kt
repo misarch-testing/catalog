@@ -1,7 +1,7 @@
-package org.misarch.catalog.persistance.repository
+package org.misarch.catalog.persistence.repository
 
 import com.infobip.spring.data.r2dbc.QuerydslR2dbcRepository
-import org.misarch.catalog.persistance.model.ProductVariantVersionEntity
+import org.misarch.catalog.persistence.model.ProductVariantVersionEntity
 import org.springframework.data.r2dbc.repository.Query
 import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository

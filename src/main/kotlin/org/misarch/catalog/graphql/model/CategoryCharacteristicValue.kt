@@ -3,7 +3,7 @@ package org.misarch.catalog.graphql.model
 import com.expediagroup.graphql.generator.annotations.GraphQLDescription
 import com.expediagroup.graphql.generator.annotations.GraphQLIgnore
 import kotlinx.coroutines.reactor.awaitSingle
-import org.misarch.catalog.persistance.repository.CategoryCharacteristicRepository
+import org.misarch.catalog.persistence.repository.CategoryCharacteristicRepository
 import org.springframework.beans.factory.annotation.Autowired
 import java.util.*
 

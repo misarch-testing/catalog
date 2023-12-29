@@ -1,7 +1,7 @@
-package org.misarch.catalog.persistance.repository
+package org.misarch.catalog.persistence.repository
 
 import com.infobip.spring.data.r2dbc.QuerydslR2dbcRepository
-import org.misarch.catalog.persistance.model.CategoryEntity
+import org.misarch.catalog.persistence.model.CategoryEntity
 import org.springframework.stereotype.Repository
 import java.util.*
 

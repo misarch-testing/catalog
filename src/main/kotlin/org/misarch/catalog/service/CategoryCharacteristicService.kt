@@ -5,11 +5,11 @@ import org.misarch.catalog.graphql.input.CategoricalCategoryCharacteristicInput
 import org.misarch.catalog.graphql.input.CreateCategoricalCategoryCharacteristicInput
 import org.misarch.catalog.graphql.input.CreateNumericalCategoryCharacteristicInput
 import org.misarch.catalog.graphql.input.NumericalCategoryCharacteristicInput
-import org.misarch.catalog.persistance.model.CategoryCharacteristicDiscriminator
-import org.misarch.catalog.persistance.model.CategoryCharacteristicEntity
-import org.misarch.catalog.persistance.model.CategoryEntity
-import org.misarch.catalog.persistance.repository.CategoryCharacteristicRepository
-import org.misarch.catalog.persistance.repository.CategoryRepository
+import org.misarch.catalog.persistence.model.CategoryCharacteristicDiscriminator
+import org.misarch.catalog.persistence.model.CategoryCharacteristicEntity
+import org.misarch.catalog.persistence.model.CategoryEntity
+import org.misarch.catalog.persistence.repository.CategoryCharacteristicRepository
+import org.misarch.catalog.persistence.repository.CategoryRepository
 import org.misarch.catalog.util.uuid
 import org.springframework.stereotype.Service
 import java.util.*
