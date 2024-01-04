@@ -1,0 +1,51 @@
+package org.misarch.catalog.persistence
+
+import io.r2dbc.spi.ConnectionFactory
+import org.flywaydb.core.Flyway
+import org.springframework.boot.autoconfigure.flyway.FlywayProperties
+import org.springframework.boot.autoconfigure.r2dbc.R2dbcProperties
+import org.springframework.boot.context.properties.EnableConfigurationProperties
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.r2dbc.connection.R2dbcTransactionManager
+
+
+/**
+ * Database / persistence configuration
+ * Configures Flyway migrations and reactive transactions
+ */
+@Configuration
+@EnableConfigurationProperties(R2dbcProperties::class, FlywayProperties::class)
+internal class PersistenceConfiguration {
+
+    /**
+     * Configures Flyway migrations
+     *
+     * @param flywayProperties the provided Flyway properties
+     * @param r2dbcProperties the provided R2DBC properties
+     * @return the configured Flyway instance
+     */
+    @Bean(initMethod = "migrate")
+    fun flyway(flywayProperties: FlywayProperties, r2dbcProperties: R2dbcProperties): Flyway {
+        return Flyway.configure()
+            .dataSource(
+                flywayProperties.url,
+                r2dbcProperties.username,
+                r2dbcProperties.password
+            )
+            .locations(*flywayProperties.locations.toTypedArray())
+            .baselineOnMigrate(true)
+            .load()
+    }
+
+    /**
+     * Configures reactive transactions via a [R2dbcTransactionManager]
+     *
+     * @param connectionFactory the provided connection factory
+     * @return the configured transaction manager
+     */
+    @Bean
+    fun transactionManager(connectionFactory: ConnectionFactory): R2dbcTransactionManager {
+        return R2dbcTransactionManager(connectionFactory)
+    }
+}

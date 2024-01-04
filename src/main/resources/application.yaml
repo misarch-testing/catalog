@@ -1,0 +1,10 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  r2dbc:
+    url: r2dbc:postgresql://product-db:5432/catalog
+  flyway:
+    url: jdbc:postgresql://product-db:5432/catalog
+    locations: classpath:db/migration
+graphql:
+  packages: org.misarch.catalog
