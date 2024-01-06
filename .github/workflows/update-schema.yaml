@@ -27,9 +27,6 @@ jobs:
         run: |
           chmod +x ./scripts/generate-graphql-schema.sh
           ./scripts/generate-graphql-schema.sh
-      - name: Create PR if required
-        run: |
-            - name: Save graphql schemas
       - name: Create PR if necessary
         run: |
           chmod +x ./scripts/create-schema-pr.sh
