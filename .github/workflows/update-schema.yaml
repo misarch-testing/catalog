@@ -19,7 +19,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
       - uses: actions/checkout@v4
         with:
-          repository: "../schemas"
+          repository: "misarch-testing/schemas"
           path: "schemas"
       - name: Execute Gradle build
         run: ./gradlew build
