@@ -27,7 +27,9 @@ jobs:
         run: |
           chmod +x ./scripts/generate-graphql-schema.sh
           ./scripts/generate-graphql-schema.sh
-      - name: Create PR if necessary
-        run: |
-          chmod +x ./scripts/create-schema-pr.sh
-          ./scripts/create-schema-pr.sh
+      - uses: peter-evans/create-pull-request@v5
+        with:
+          path: ./schemas
+          commit-message: Update catalog schema
+          branch: update/catalog
+          token: ${{ secrets.SCHEMAS_PUSH_SECRET }}
