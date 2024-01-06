@@ -1,7 +1,10 @@
 package org.misarch.catalog.persistence
 
+import com.querydsl.sql.PostgreSQLTemplates
+import com.querydsl.sql.SQLTemplates
 import io.r2dbc.spi.ConnectionFactory
 import org.flywaydb.core.Flyway
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.boot.autoconfigure.flyway.FlywayProperties
 import org.springframework.boot.autoconfigure.r2dbc.R2dbcProperties
 import org.springframework.boot.context.properties.EnableConfigurationProperties
@@ -26,6 +29,7 @@ internal class PersistenceConfiguration {
      * @return the configured Flyway instance
      */
     @Bean(initMethod = "migrate")
+    @ConditionalOnProperty(name = ["spring.flyway.enabled"], matchIfMissing = true, havingValue = "true")
     fun flyway(flywayProperties: FlywayProperties, r2dbcProperties: R2dbcProperties): Flyway {
         return Flyway.configure()
             .dataSource(
@@ -47,5 +51,17 @@ internal class PersistenceConfiguration {
     @Bean
     fun transactionManager(connectionFactory: ConnectionFactory): R2dbcTransactionManager {
         return R2dbcTransactionManager(connectionFactory)
+    }
+
+    /**
+     * Configures Querydsl SQL templates
+     * Overwrites the default configuration which depends on flyway
+     * 
+     * @return the configured SQL templates
+     */
+    @Bean
+    fun querydslSqlConfiguration(): com.querydsl.sql.Configuration {
+        val configuration = com.querydsl.sql.Configuration(PostgreSQLTemplates.DEFAULT)
+        return configuration
     }
 }
