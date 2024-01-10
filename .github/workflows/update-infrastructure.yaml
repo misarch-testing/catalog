@@ -24,6 +24,6 @@ jobs:
           branch: update/catalog
           token: ${{ secrets.INFRASTRUCTURE_DOCKER_PUSH_SECRET }}
       - name: Set to auto merge
-        run: gh pr merge update/catalog --auto -R misarch-testing/infrastructure-docker
+        run: gh pr merge update/catalog --auto --merge -R misarch-testing/infrastructure-docker
         env:
           GH_TOKEN: ${{ secrets.INFRASTRUCTURE_DOCKER_PUSH_SECRET }}
