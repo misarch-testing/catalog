@@ -1,0 +1,27 @@
+name: Update infrastructure-docker submodule
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  schema:
+    name: Update infrastructure-docker submodule
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: "misarch-testing/infrastructure-docker"
+          submodules: true
+      - name: Update submodule
+        run: |
+          cd catalog
+          git checkout ${{ github.sha }}
+      - uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: Update catalog schema
+          branch: update/catalog
+          token: ${{ secrets.INFRASTRUCTURE_DOCKER_PUSH_SECRET }}
+      - name: Set to auto merge
+        run: gh pr merge --auto
