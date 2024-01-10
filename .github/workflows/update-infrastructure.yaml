@@ -24,6 +24,6 @@ jobs:
           branch: update/catalog
           token: ${{ secrets.INFRASTRUCTURE_DOCKER_PUSH_SECRET }}
       - name: Set to auto merge
-        run: gh pr merge update/catalog --auto
+        run: gh pr merge update/catalog --auto --merge
         env:
           GH_TOKEN: ${{ secrets.INFRASTRUCTURE_DOCKER_PUSH_SECRET }}
